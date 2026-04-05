@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Granola Enricher — launchd WatchPaths daemon
+
+  SETUP (run once per machine):
+    1. Copy granola_enricher.py to your Obsidian _tools/scripts/ folder
+    2. Add ANTHROPIC_API_KEY to _tools/scripts/config.py
+    3. Edit VAULT_SCRIPT_PATH below if your username or vault path differs
+    4. cp this file ~/Library/LaunchAgents/
+    5. launchctl load ~/Library/LaunchAgents/com.motorthings.granola-enricher.plist
+
+  Fires automatically when any file appears in ~/Documents/Vault/Granola/
+  Logs: ~/Library/Logs/granola-enricher.log
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.motorthings.granola-enricher</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <!-- UPDATE THIS PATH if your vault lives elsewhere -->
+        <string>/Users/motorthings/Documents/Vault/_tools/scripts/granola_enricher.py</string>
+    </array>
+
+    <key>WatchPaths</key>
+    <array>
+        <!-- UPDATE THIS PATH if your vault lives elsewhere -->
+        <string>/Users/motorthings/Documents/Vault/Granola</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/motorthings/Library/Logs/granola-enricher.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/motorthings/Library/Logs/granola-enricher-error.log</string>
+</dict>
+</plist>
