@@ -2,7 +2,24 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/motorthings/.claude/statusline-command.sh"
+  },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/motorthings/.claude/hooks/auto-convert-docs.py",
+            "timeout": 120,
+            "statusMessage": "Converting document..."
+          }
+        ]
+      }
+    ],
     "PreCompact": [
       {
         "hooks": [
